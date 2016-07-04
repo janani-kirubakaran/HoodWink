@@ -14,6 +14,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.dao.CategoryDAO;
+import com.dao.CategoryDAOImpl;
 import com.model.*;
 
 
@@ -51,7 +53,7 @@ public class ApplicationContextConfig {
     public SessionFactory getSessionFactory(DataSource dataSource) {
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
-    	//sessionBuilder.addAnnotatedClasses(Category.class);
+    	sessionBuilder.addAnnotatedClasses(Category.class);
     	//sessionBuilder.addAnnotatedClasses(Supplier.class);
     	sessionBuilder.addAnnotatedClasses(User.class);
     	sessionBuilder.addAnnotatedClasses(Admin.class);
@@ -68,12 +70,12 @@ public class ApplicationContextConfig {
 		return transactionManager;
 	}
     
-   /* @Autowired
+   @Autowired
     @Bean(name = "categoryDao")
     public CategoryDAO geCategorDao(SessionFactory sessionFactory) {
     	return new CategoryDAOImpl(sessionFactory);
     }
-*/
+
 
 }
 
