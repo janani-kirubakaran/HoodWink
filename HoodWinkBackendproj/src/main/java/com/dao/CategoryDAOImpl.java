@@ -36,6 +36,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public void saveOrUpdate(Category category) {
 		sessionFactory.getCurrentSession().saveOrUpdate(category);
 	}
+	@Transactional
+	public void update(Category category) {
+		sessionFactory.getCurrentSession().update(category);
+	}
 
 	@Transactional
 	public void delete(String id) {
@@ -46,7 +50,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	@Transactional
 	public Category get(String id) {
-		String hql = "from Category where id=" + id;
+		String hql = "from Category where id='" + id+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
