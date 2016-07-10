@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +14,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	
+
 <title>HoodWink Admin</title>
 </head>
 <style>
@@ -145,6 +149,8 @@ html, body {
 			$("#admin-home").delay(100).fadeIn(100);
 			$("#add-form").fadeOut(100);
 			$('#add-form-link').removeClass('active');
+			$("#supplier-form").fadeOut(100);
+			$('#supplier-link').removeClass('active');
 			$("#category-form").fadeOut(100);
 			$('#category-link').removeClass('active');
 			$(this).addClass('active');
@@ -154,6 +160,8 @@ html, body {
 			$("#add-form").delay(100).fadeIn(100);
 			$("#admin-home").fadeOut(100);
 			$('#admin-home-link').removeClass('active');
+			$("#supplier-form").fadeOut(100);
+			$('#supplier-link').removeClass('active');
 			$("#category-form").fadeOut(100);
 			$('#category-link').removeClass('active');
 			$(this).addClass('active');
@@ -163,14 +171,29 @@ html, body {
 			$("#category-form").delay(100).fadeIn(100);
 			$("#admin-home").fadeOut(100);
 			$('#admin-home-link').removeClass('active');
+			$("#supplier-form").fadeOut(100);
+			$('#supplier-link').removeClass('active');
 			$("#add-form").fadeOut(100);
 			$('#add-form-link').removeClass('active');
      		$(this).addClass('active');
 			e.preventDefault();
 		});
+		$('#supplier-link').click(function(e) {
+			$("#supplier-form").delay(100).fadeIn(100);
+			$("#admin-home").fadeOut(100);
+			$('#admin-home-link').removeClass('active');
+			$("#category-form").fadeOut(100);
+			$('#caetgory-link').removeClass('active');
+			$("#add-form").fadeOut(100);
+			$('#add-form-link').removeClass('active');
+     		$(this).addClass('active');
+			e.preventDefault();
+		});
+
 	});
 </script>
-<body>
+
+<body ng-app="myApp">
 	<div class="leftNav">
 		<nav class="navbar navbar-inverse">
 
@@ -185,81 +208,54 @@ html, body {
 								class="glyphicon glyphicon-home"></span> Admin Home</a></li>
 						<li><a href="#" id="add-form-link">Add admin</a></li>
 						<li><a href="#" id="category-link">Add categories</a></li>
+						<li><a href="#" id="supplier-link">Add Supplier</a></li>
+						<li><a href="getcs" id="product-link">Add product</a></li>
+						<li><a href="getAllCategories">View categories</a></li>
+					
+						<li><a href="getAllSupplier">View supplier</a></li>
+						<li><a href="getAllProduct">View Product</a></li>
+						
 					</ul>
 				</div>
 			</div>
 		</div>
+		</nav>
 	</div>
-	</nav>
+	
 
 	<div class="topPanel">
 		<div class="container">
-
+         <div class="well">
+         	<div class="row">
+	<div id="admin-home">							
+	<h1>Welcome Admin ${name}</h1>
+<h4>Admin can perform Create,Add,Delete,Edit- Category,Supplier,Product</h4>
+<h5>only adin can other admin</h5></div>
+<form:form id="add-form"  action="adminregister" method="post">
+		<div class="form-group">
 			<div class="row">
-				<div class="col-lg-6 col-lg-offset-3">
-					<div class="panel panel-login">
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-lg-12">
-									<form:form id="admin-home" action="getAllCategories" method="post"
-										role="form" style="display: block;">
-										
-<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="display categories"
-														id="register-submit" tabindex="3"
-														class="form-control btn btn-register" value="display categories">
+				<div class="col-sm-6 col-sm-offset-3">
+					<input type="text" name="adminname" id="adminname" tabindex="1"
+						class="form-control" placeholder="adminname" value=""> <input
+						type="password" name="password" id="password" tabindex="2"
+						class="form-control" placeholder="Password"> <input
+						type="text" name="contactnumber" id="contactnumber" tabindex="3"
+						class="form-control" placeholder="Contact number"> <input
+						type="submit" name="register-submit" id="register-submit"
+						tabindex="3" class="form-control btn btn-register"
+						value="admin login">
+				</div>
+			</div>
+		</div>
 
-												</div>
-											</div>
-										</div>
-													</form:form>
 
-									<form:form id="add-form" action="adminregister" method="post"
-										role="form" style="display: none;">
-										<div class="form-group">
-											<input type="text" name="adminname" id="adminname"
-												tabindex="1" class="form-control" placeholder="adminname"
-												value="">
-										</div>
-
-										<div class="form-group">
-											<input type="password" name="password" id="password"
-												tabindex="2" class="form-control" placeholder="Password">
-										</div>
-										<div class="form-group">
-											<input type="text" name="contactnumber" id="contactnumber"
-												tabindex="3" class="form-control"
-												placeholder="Contact number">
-										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="register-submit"
-														id="register-submit" tabindex="3"
-														class="form-control btn btn-register" value="admin login">
-
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-lg-12">
-
-													<div class="text-center">
-														<a href="http://phpoll.com/recover" tabindex="4"
-															class="forgot-password">Forgot Password?</a>
-													</div>
-												</div>
-											</div>
-										</div>
-
-									</form:form>
-									
+	</form:form>
+						
 									<form:form id="category-form" action="addCategory" method="post">
-									<div class="row">
+									<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+									
 										<table>
 											<tr>
 												<td>Category ID:</td>
@@ -281,19 +277,116 @@ html, body {
 
 										</table>
 										</div>
+</div></div>
+									</form:form>			
+								<form:form id="supplier-form" action="addSupplier" method="post">
+									<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+									
+										<table>
+											<tr>
+												<td>Supplier ID:</td>
+												<td><input type="text" name="supplierid"></td>
+											</tr>
+											<tr>
+												<td>Supplier name:</td>
+												<td><input type="text" name="name"></td>
+											</tr>
+											<tr>
+												<td>Supplier Address :</td>
+												<td><input type="text" name="address"></td>
+											</tr>
+											<tr>
+												<td>Supplier MailID :</td>
+												<td><input type="text" name="emailid"></td>
+											</tr>
+											<tr>
+												<td>Supplier contact number:</td>
+												<td><input type="text" name="contactnumber"></td>
+											</tr>
+											<tr>
+												<td><input type="submit" value="Add">
+												<td><input type="reset" value="Reset">
+											</tr>
 
-									</form:form>
+										</table>
+										</div>
+</div></div>
+									</form:form>			
+								
+                                   	<form:form id="product-form" action="addProduct" method="post">
+									<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+									
+										<table>
+											<tr>
+												<td>Product ID:</td>
+												<td><input type="text" name="id"></td>
+											</tr>
+											<tr>
+												<td>Product name:</td>
+												<td><input type="text" name="name"></td>
+											</tr>
+											<tr>
+												<td>Product Description:</td>
+												<td><input type="text" name="description"></td>
+											</tr>
+											<tr>
+												<td>Product Price :</td>
+												<td><input type="text" name="price"></td>
+											</tr>
+											<tr>
+												<td>Product Category:</td>
+												<td><select><option value="categoryid"><c:forEach items="${productList}" var="product" varStatus="status">${product.categoryid}
+				</c:forEach></option></select></td>
+												
+											</tr>
+											<tr>
+												<td>Product Supplier:</td>
+												<td><select multiple><option value="supplierid"><c:forEach items="${productList}" var="product" varStatus="status">${product.supplierid}
+				</c:forEach></option></select></td>
+												
+											</tr>
+											
+											<tr>
+												<td><input type="submit" value="Add">
+												<td><input type="reset" value="Reset">
+											</tr>
+
+										</table>
+										</div>
+</div></div>
+									</form:form>			
+								
                                    
-                                                              
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+             </div>
+             </div>
+             </div>
+             </div>
+             	<div class="row">
+			<div ng-view></div>
+			<script>
+			var app = angular.module("myApp", ["ngRoute"]);
+			app.config(function($routeProvider) {
+			    $routeProvider
+			    .when("getAllCategories", {
+			        templateUrl : "views/categorylist.jsp"
+			    })
+			    .when("getAllSupplier", {
+			        templateUrl : "views/supplierList.jsp"
+			    })
+			   .when("getAllProduct", {
+			        templateUrl : "views/productList.jsp"
+			    })
+			    //.when("adminregister", {
+			       // templateUrl : "views/adminRegister.jsp"
+			   // })*/
+
+			   	});
+			</script>
+                     </div>       
 
 
 
