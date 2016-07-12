@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.ProductDAO;
+import com.google.gson.Gson;
 import com.model.Category;
 import com.model.Product;
 import com.model.Supplier;
@@ -27,13 +29,13 @@ public class ProductController {
 	public ModelAndView addProduct(@ModelAttribute Product product) {
 		
 		productDAO.saveOrUpdate(product);
-         List<Product> productlist = productDAO.list();
+         //List<Product> productlist = productDAO.list();
 		
 		ModelAndView mv = new ModelAndView("productList");
-		mv.addObject("productList", productlist);
+		//mv.addObject("productList", productlist);
 		return mv;
 	 }
-	@RequestMapping("getcs")
+	@RequestMapping(value="getcs",method = RequestMethod.GET)
 	public ModelAndView getIds(@ModelAttribute Product product )
 	{
 		List<Category> categoryids=productDAO.getByCategoryID();
@@ -47,24 +49,34 @@ public class ProductController {
 	public ModelAndView deleteSuppliers(@PathVariable(value = "id") String id) {
 		System.out.println("delete supplier");
 		productDAO.delete(id);
-		List<Product> productlist = productDAO.list();
+		//List<Product> productlist = productDAO.list();
 		ModelAndView mv = new ModelAndView("productList");
-		mv.addObject("productList", productlist);
+		//mv.addObject("productList", productlist);
 		return mv;
 	}	
 	
-	@RequestMapping("/getAllProduct")
+	@RequestMapping(value="getAllProduct")
 	public ModelAndView getAllProducts() {
 
 		System.out.println("getAllProducts");
 		
-		List<Product> productlist = productDAO.list();
+		//List<Product> productlist = productDAO.list();
 		
 		ModelAndView mv = new ModelAndView("productList");
-		mv.addObject("productList", productlist);
+		//mv.addObject("productList", productlist);
 
 		return mv;
 	}
+
+	@RequestMapping(value="listProduct",method= RequestMethod.GET)
+public @ResponseBody String getGsons()
+{
+	Gson gson = new Gson();
+System.out.print("gson");
+List<Product> categoryList = productDAO.list();
+	 String pdata = gson.toJson(categoryList);
+    return pdata;
+}
 	@RequestMapping(value = "editProduct")
 	public ModelAndView edit() {
 
@@ -83,16 +95,20 @@ public class ProductController {
 		return mv;
 	
 	}
-
+	@RequestMapping("admin")
+	public ModelAndView goTOAdmin()
+	{
+		return new ModelAndView("adminhome");
+	}
 	@RequestMapping(value = "updateProduct", method = RequestMethod.POST)
 	public ModelAndView editsave(@ModelAttribute Product product) {
 		System.out.println("controller updation");
 		productDAO.update(product);
 		System.out.println("updated");
-		List<Product> productlist = productDAO.list();
+		//List<Product> productlist = productDAO.list();
 
 		ModelAndView mv = new ModelAndView("productList");
-		mv.addObject("productList", productlist);		
+		//mv.addObject("productList", productlist);		
 		return mv;
 	}
 

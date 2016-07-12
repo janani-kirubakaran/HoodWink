@@ -210,7 +210,7 @@ html, body {
 						<li><a href="#" id="category-link">Add categories</a></li>
 						<li><a href="#" id="supplier-link">Add Supplier</a></li>
 						<li><a href="getcs" id="product-link">Add product</a></li>
-						<li><a href="getAllCategories">View categories</a></li>
+						<li><a href="getAllCategory">View categories</a></li>
 					
 						<li><a href="getAllSupplier">View supplier</a></li>
 						<li><a href="getAllProduct">View Product</a></li>
@@ -315,51 +315,7 @@ html, body {
 </div></div>
 									</form:form>			
 								
-                                   	<form:form id="product-form" action="addProduct" method="post">
-									<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-									
-										<table>
-											<tr>
-												<td>Product ID:</td>
-												<td><input type="text" name="id"></td>
-											</tr>
-											<tr>
-												<td>Product name:</td>
-												<td><input type="text" name="name"></td>
-											</tr>
-											<tr>
-												<td>Product Description:</td>
-												<td><input type="text" name="description"></td>
-											</tr>
-											<tr>
-												<td>Product Price :</td>
-												<td><input type="text" name="price"></td>
-											</tr>
-											<tr>
-												<td>Product Category:</td>
-												<td><select><option value="categoryid"><c:forEach items="${productList}" var="product" varStatus="status">${product.categoryid}
-				</c:forEach></option></select></td>
-												
-											</tr>
-											<tr>
-												<td>Product Supplier:</td>
-												<td><select multiple><option value="supplierid"><c:forEach items="${productList}" var="product" varStatus="status">${product.supplierid}
-				</c:forEach></option></select></td>
-												
-											</tr>
-											
-											<tr>
-												<td><input type="submit" value="Add">
-												<td><input type="reset" value="Reset">
-											</tr>
-
-										</table>
-										</div>
-</div></div>
-									</form:form>			
-								
+                                 								
                                    
              </div>
              </div>
@@ -385,7 +341,9 @@ html, body {
 			   // })*/
 
 			   	});
+			
 			</script>
+			
                      </div>       
 
 

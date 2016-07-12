@@ -55,5 +55,9 @@
 										</div>
 </div></div>
 									</form:form>	
+									<br/>
+<br/>
+	<a href="admin">go back to admin</a>
+									
 </body>
 </html>
