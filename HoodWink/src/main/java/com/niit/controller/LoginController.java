@@ -3,6 +3,7 @@ package com.niit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,25 +21,40 @@ public class LoginController {
 	UserDAO login;
 
 	@RequestMapping(value="/isValidUser", method = RequestMethod.POST)
-	public ModelAndView showMessage(@RequestParam(value = "username") String name,
-			@RequestParam(value = "password") String password) {
+	public String showMessage(@RequestParam(value = "username") String name,
+			@RequestParam(value = "password") String password,Model model) {
 			System.out.println("controller working");
 		String message;
-		ModelAndView mv;
+	
 		if (login.isValidUser(name,password)) {
 			System.out.println("controller working");
 			message = "Valid credentials";
-			mv = new ModelAndView("home");
+			model.addAttribute("name",name);
+			model.addAttribute("username", "true");
+			return "redirect:/home";
 		} else {
 			message = "Invalid credentials";
-			mv = new ModelAndView("signin");
+			model.addAttribute("message",message);
+			return "signin";
 		}
 
-		mv.addObject("message", message);
-		mv.addObject("name", name);
-
+		
+	}
+		@RequestMapping("adminhome")
+	public ModelAndView onLoadAdminHome()
+	{
+		ModelAndView mv=new ModelAndView("adminhome");
+	
 		return mv;
 	}
+	@RequestMapping("signin")
+	public ModelAndView onLoadSignin()
+	{
+		ModelAndView mv=new ModelAndView("signin");
+	
+		return mv;
+	}
+
 	@RequestMapping(value="/register", method = RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute User user) {
 		

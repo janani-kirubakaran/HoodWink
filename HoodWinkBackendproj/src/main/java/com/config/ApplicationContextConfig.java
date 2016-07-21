@@ -27,6 +27,7 @@ public class ApplicationContextConfig {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
 		dataSource.setUrl("jdbc:h2:tcp://localhost/~/hoodwink");
+
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 
@@ -35,6 +36,8 @@ public class ApplicationContextConfig {
 
 	private Properties getHibernateProperties() {
 		Properties properties = new Properties();
+
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		return properties;
@@ -77,5 +80,11 @@ public class ApplicationContextConfig {
 	public ProductDAO getProductDao(SessionFactory sessionFactory) {
 		return new ProductDAOImpl(sessionFactory);
 	}
+
+    @Autowired
+    @Bean(name = "cartDAO")
+    public CartDAO getAccountDao(SessionFactory sessionFactory) {   //returned CartDAO from this method ... error
+    	return new CartDAOImpl(sessionFactory);
+    }
 
 }

@@ -3,6 +3,7 @@ package com.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,10 @@ public class SupplierDAOImpl implements SupplierDAO {
 
 		return list;
 	}
-	@Transactional
+	/*@Transactional
 	public void update(Supplier supplier) {
 		sessionFactory.getCurrentSession().update(supplier);
-	}
+	}*/
 	@Transactional
 	public void saveOrUpdate(Supplier supplier) {
 		sessionFactory.getCurrentSession().saveOrUpdate(supplier);
@@ -48,7 +49,27 @@ public class SupplierDAOImpl implements SupplierDAO {
 
 	@Transactional
 	public Supplier get(String supplierid) {
-		String hql = "from Supplier where supplierid=" + supplierid;
+		try {
+			String hql = "from Supplier where supplierid=" + "'"+supplierid+"'";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			
+			@SuppressWarnings("unchecked")
+			List<Supplier> list = (List<Supplier>) query.list();
+			
+			if (list != null && !list.isEmpty()) {
+				return list.get(0);
+			}
+			
+			
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Transactional
+	public Supplier getByName(String name) {
+		String hql = "from Supplier where name=" + "'"+ name+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
@@ -60,4 +81,6 @@ public class SupplierDAOImpl implements SupplierDAO {
 		
 		return null;
 	}
+
+
 }

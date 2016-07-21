@@ -5,7 +5,7 @@
 					method : 'GET',
 					url : 'listCategory'
 				}).success(function(data, status, headers, config) {
-					$scope.categories = data;
+					$scope.categories = data; alert(data);
 				}).error(function(data, status, headers, config) {
 					alert( "failure");
 				});

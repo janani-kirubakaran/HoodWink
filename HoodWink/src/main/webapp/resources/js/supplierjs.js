@@ -5,8 +5,10 @@ var sApp = angular.module("sApp", []);
 					method : 'GET',
 					url : 'listSupplier'
 				}).success(function(sdata, status, headers, config) {
-					$scope.suppliers = sdata;
+					$scope.suppliers = sdata;alert(sdata);
 				}).error(function(sdata, status, headers, config) {
 					alert( "failure");
 				});
 		} ])
+		
+		

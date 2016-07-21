@@ -4,8 +4,8 @@ package com.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
@@ -13,61 +13,63 @@ import org.springframework.stereotype.Component;
 @Table(name = "product")
 @Component
 public class Product {
-	@Id
-	private String id;
-
+	
 	private String name;
 	private String description;
-	private String categoryid;
-	private String supplierid;
+	
+private String categoryid;
+private String supplierid;
+	@ManyToOne
+	@JoinColumn(name="categoryid",nullable=false,updatable=false,insertable=false)
+	private Category category;
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="supplierid",nullable=false,updatable=false,insertable=false)
+	private Supplier supplier;
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
 	public String getCategoryid() {
-		return categoryid;
+	return categoryid;
+}
+
+public void setCategoryid(String categoryid) {
+	this.categoryid = categoryid;
+}
+
+public String getSupplierid() {
+	return supplierid;
+}
+
+public void setSupplierid(String supplierid) {
+	this.supplierid = supplierid;
+}
+
+	@Id
+	private String productid;
+
+	public String getProductid() {
+		return productid;
 	}
 
-	public void setCategoryid(String categoryid) {
-		this.categoryid = categoryid;
+	public void setProductid(String productid) {
+		this.productid = productid;
 	}
 
-	public String getSupplierid() {
-		return supplierid;
-	}
-
-	public void setSupplierid(String supplierid) {
-		this.supplierid = supplierid;
-	}
-
-	/*@OneToMany
-	@JoinColumn(name="id")
-	private Collection<Category> categoryid = new ArrayList<Category>();
-
-	public Collection<Category> getCategory() {
-		return categoryid;
-	}
-
-	public void setCategory(Collection<Category> category) {
-		this.categoryid = category;
-	}
-
-	@OneToMany
-	@JoinColumn(name="supplierid")
-	private Collection<Supplier> supplierid = new ArrayList<Supplier>();
-
-	public Collection<Supplier> getSupplier() {
-		return supplierid;
-	}
-
-	public void setSupplier(Collection<Supplier> supplierid) {
-		this.supplierid = supplierid;
-	}
-*/
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -84,13 +86,13 @@ public class Product {
 		this.description = description;
 	}
 
-	public long getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
-	private long price;
+	private int price;
 }

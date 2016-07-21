@@ -1,8 +1,14 @@
 package com.model;
 
+//import java.util.ArrayList;
+//import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+//import javax.persistence.FetchType;
 import javax.persistence.Id;
+//import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -17,7 +23,18 @@ public class Supplier {
 	private String name;
 	private String address;
 	private String emailid;
-	private long contactnumber;
+	private int contactnumber;
+	//private Set<Product> product;
+	
+	/*@OneToMany(mappedBy="supplier",fetch=FetchType.EAGER)
+	
+
+	public Set<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(Set<Product> product) {
+		this.product = product;
+	}*/
 	public String getSupplierid() {
 		return supplierid;
 	}
@@ -42,10 +59,10 @@ public class Supplier {
 	public void setEmailid(String emailid) {
 		this.emailid = emailid;
 	}
-	public long getContactnumber() {
+	public int getContactnumber() {
 		return contactnumber;
 	}
-	public void setContactnumber(long contactnumber) {
+	public void setContactnumber(int contactnumber) {
 		this.contactnumber = contactnumber;
 	}
 }

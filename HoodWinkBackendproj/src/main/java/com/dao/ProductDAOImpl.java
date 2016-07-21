@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.model.Category;
+//import com.model.Category;
 import com.model.Product;
-import com.model.Supplier;
+//import com.model.Supplier;
 
 @Repository("productDAO")
 public class ProductDAOImpl implements ProductDAO {
@@ -23,19 +23,6 @@ public class ProductDAOImpl implements ProductDAO {
 	public ProductDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Category> getByCategoryID()
-	 {
-	  return (List<Category>) sessionFactory.getCurrentSession().createCriteria(Category.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-	 }
-	
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Supplier> getBySupplierID()
-	 {
-	  return (List<Supplier>) sessionFactory.getCurrentSession().createCriteria(Supplier.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-	 }
 
 
 	@Transactional
@@ -58,15 +45,15 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Transactional
-	public void delete(String id) {
+	public void delete(String productid) {
 		Product ProductToDelete = new Product();
-		ProductToDelete.setId(id);
+		ProductToDelete.setProductid(productid);
 		sessionFactory.getCurrentSession().delete(ProductToDelete);
 	}
 
 	@Transactional
-	public Product get(String id) {
-		String hql = "from Product where id='" + id+"'";
+	public Product get(String productid) {
+		String hql = "from Product where productid='" + productid +"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")

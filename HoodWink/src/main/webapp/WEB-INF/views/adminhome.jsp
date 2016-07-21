@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,343 +14,83 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-	
-
-<title>HoodWink Admin</title>
-</head>
-<style>
-.panel-login {
-	border-color: #ccc;
-	-webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
-	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+<style type="text/css">
+.dropdown{
+  cursor: pointer;
+  }
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
-.panel-login>.panel-heading {
-	color: #00415d;
-	background-color: #fff;
-	border-color: #fff;
-	text-align: center;
-}
-
-.panel-login>.panel-heading a {
-	text-decoration: none;
-	color: #666;
-	font-weight: bold;
-	font-size: 15px;
-	-webkit-transition: all 0.1s linear;
-	-moz-transition: all 0.1s linear;
-	transition: all 0.1s linear;
-}
-
-.panel-login>.panel-heading a.active {
-	color: #029f5b;
-	font-size: 18px;
-}
-
-.panel-login input[type="text"], .panel-login input[type="email"],
-	.panel-login input[type="password"] {
-	height: 45px;
-	border: 1px solid #ddd;
-	font-size: 16px;
-	-webkit-transition: all 0.1s linear;
-	-moz-transition: all 0.1s linear;
-	transition: all 0.1s linear;
-}
-
-.panel-login input:hover, .panel-login input:focus {
-	outline: none;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	border-color: #ccc;
-}
-
-.btn-login {
-	background-color: #59B2E0;
-	outline: none;
-	color: #fff;
-	font-size: 14px;
-	height: auto;
-	font-weight: normal;
-	padding: 14px 0;
-	text-transform: uppercase;
-	border-color: #59B2E6;
-}
-
-.btn-login:hover, .btn-login:focus {
-	color: #fff;
-	background-color: #53A3CD;
-	border-color: #53A3CD;
-}
-
-.forgot-password {
-	text-decoration: underline;
-	color: #888;
-}
-
-.forgot-password:hover, .forgot-password:focus {
-	text-decoration: underline;
-	color: #666;
-}
-
-.btn-register {
-	background-color: #1CB94E;
-	outline: none;
-	color: #fff;
-	font-size: 14px;
-	height: auto;
-	font-weight: normal;
-	padding: 14px 0;
-	text-transform: uppercase;
-	border-color: #1CB94A;
-}
-
-.btn-register:hover, .btn-register:focus {
-	color: #fff;
-	background-color: #1CA347;
-	border-color: #1CA347;
-}
-
-.leftNav {
-	width: 20%;
-	height: 100%;
-	float: left;
-}
-
-.topPanel {
-	width: 60%;
-	height: 100%;
-	float: center;
-}
-
-.bottomPanel {
-	width: 80%;
-	height: 50%;
-	float: right;
-}
-
-html, body {
-	height: 100%;
-	overflow: hidden;
-}
-
-.panel-body {
-	height: 700px;
-	width: 550px;
-}
 </style>
-<script>
-	$(function() {
 
-		$('#admin-home-link').click(function(e) {
-			$("#admin-home").delay(100).fadeIn(100);
-			$("#add-form").fadeOut(100);
-			$('#add-form-link').removeClass('active');
-			$("#supplier-form").fadeOut(100);
-			$('#supplier-link').removeClass('active');
-			$("#category-form").fadeOut(100);
-			$('#category-link').removeClass('active');
-			$(this).addClass('active');
-			e.preventDefault();
-		});
-		$('#add-form-link').click(function(e) {
-			$("#add-form").delay(100).fadeIn(100);
-			$("#admin-home").fadeOut(100);
-			$('#admin-home-link').removeClass('active');
-			$("#supplier-form").fadeOut(100);
-			$('#supplier-link').removeClass('active');
-			$("#category-form").fadeOut(100);
-			$('#category-link').removeClass('active');
-			$(this).addClass('active');
-			e.preventDefault();
-		});
-		$('#category-link').click(function(e) {
-			$("#category-form").delay(100).fadeIn(100);
-			$("#admin-home").fadeOut(100);
-			$('#admin-home-link').removeClass('active');
-			$("#supplier-form").fadeOut(100);
-			$('#supplier-link').removeClass('active');
-			$("#add-form").fadeOut(100);
-			$('#add-form-link').removeClass('active');
-     		$(this).addClass('active');
-			e.preventDefault();
-		});
-		$('#supplier-link').click(function(e) {
-			$("#supplier-form").delay(100).fadeIn(100);
-			$("#admin-home").fadeOut(100);
-			$('#admin-home-link').removeClass('active');
-			$("#category-form").fadeOut(100);
-			$('#caetgory-link').removeClass('active');
-			$("#add-form").fadeOut(100);
-			$('#add-form-link').removeClass('active');
-     		$(this).addClass('active');
-			e.preventDefault();
-		});
+<title>AdminHome</title>
+</head>
 
-	});
-</script>
-
-<body ng-app="myApp">
-	<div class="leftNav">
-		<nav class="navbar navbar-inverse">
-
-		<div class="container">
-			<div class="leftNav">
-				<div class="container-fluid">
-					<ul class="nav nav-pills nav-stacked ">
-
-						<li>
-							<div class="collapse navbar-collapse" id="myNavbar"></div>
-						<li class="active"><a href="#" id="admin-home-link"><span
-								class="glyphicon glyphicon-home"></span> Admin Home</a></li>
-						<li><a href="#" id="add-form-link">Add admin</a></li>
-						<li><a href="#" id="category-link">Add categories</a></li>
-						<li><a href="#" id="supplier-link">Add Supplier</a></li>
-						<li><a href="getcs" id="product-link">Add product</a></li>
-						<li><a href="getAllCategory">View categories</a></li>
+<body style="background-image: url(resources/images/background2.jpg); background-size: cover">
+	<nav role="navigation" class="navbar navbar-inverse"
+		style="background-color:#000000;
+     box-shadow:inset 0px 2px 3px 3px #606060">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" data-target="#navbarCollapse"
+			data-toggle="collapse" class="navbar-toggle">
+			<span class="sr-only"></span> <span class="icon-bar"></span>
+			<span class="icon-bar"></span> <span class="icon-bar"></span>
+		</button>
+		<a href="#" class="navbar-brand"
+			style="font-family: Brush script MT, cursive; font-size: 30px; font-color: #FFFFFF; text-shadow: 10px 10px 0px #303030;">HoodWink</a>
+	</div>
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse">
+		<ul class="nav navbar-nav">
+			<li class=" active"><a href="adminhome"> Admin Home</a></li>
+			<li class="action"><a href="addAdmin">Add Admin</a></li>
+			<li class="dropdown"><a data-toggle="dropdown"
+				class="dropdown-toggle" >AdminOperations<b
+					class="caret"></b></a>
+				<ul role="menu" class="dropdown-menu"
+					style="background-color:#202020; box-shadow: 2px 2px 4px 4px #707070;">
+					<li><a href="getAllCategory" style="color:#C0C0C0">View Category</a></li>
+					<li><a href="getAllSupplier" style="color:#C0C0C0">View Supplier</a></li>
+					<li><a href="getAllProduct" style="color:#C0C0C0">View Products</a></li>
 					
-						<li><a href="getAllSupplier">View supplier</a></li>
-						<li><a href="getAllProduct">View Product</a></li>
-						
-					</ul>
-				</div>
-			</div>
-		</div>
-		</nav>
+				</ul></li>
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+		  	<li><a href="#"><span class="glyphicon glyphicon-user"></span>${name}</a></li>
+		
+			<li><a href="login.jsp"><span
+					class="glyphicon glyphicon-power-off"></span>Logout</a></li>
+		</ul>
+				<ul class="nav navbar-nav navbar-right">
+			<li><a href="home"><span
+					class="glyphicon glyphicon-shopping-home"></span>Main Home</a></li>
+		</ul>
+	</div>
+	</nav>
+	<div id="getAllCategory">
+	<c:if test="${clickedCategory==true}">
+	<%@include file="categorylist.jsp" %>
+	</c:if>
+	</div>
+<div id="addAdmin">
+	<c:if test="${clickedAddAdmin==true}">
+	<%@include file="addAdmin.jsp" %>
+	</c:if>
+	</div>
+
+	<div id="getAllSupplier">
+	<c:if test="${clickedSupplier==true}">
+	<%@include file="supplierList.jsp" %>
+	</c:if>
+	</div>
+	<div id="getAllProduct">
+	<c:if test="${clickedProduct==true}">
+	<%@include file="productList.jsp" %>
+	</c:if>
 	</div>
 	
-
-	<div class="topPanel">
-		<div class="container">
-         <div class="well">
-         	<div class="row">
-	<div id="admin-home">							
-	<h1>Welcome Admin ${name}</h1>
-<h4>Admin can perform Create,Add,Delete,Edit- Category,Supplier,Product</h4>
-<h5>only adin can other admin</h5></div>
-<form:form id="add-form"  action="adminregister" method="post">
-		<div class="form-group">
-			<div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-					<input type="text" name="adminname" id="adminname" tabindex="1"
-						class="form-control" placeholder="adminname" value=""> <input
-						type="password" name="password" id="password" tabindex="2"
-						class="form-control" placeholder="Password"> <input
-						type="text" name="contactnumber" id="contactnumber" tabindex="3"
-						class="form-control" placeholder="Contact number"> <input
-						type="submit" name="register-submit" id="register-submit"
-						tabindex="3" class="form-control btn btn-register"
-						value="admin login">
-				</div>
-			</div>
-		</div>
-
-
-	</form:form>
-						
-									<form:form id="category-form" action="addCategory" method="post">
-									<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-									
-										<table>
-											<tr>
-												<td>Category ID:</td>
-												<td><input type="text" name="id"></td>
-											</tr>
-											<tr>
-												<td>Category Name:</td>
-												<td><input type="text" name="name"></td>
-											</tr>
-											<tr>
-												<td>Category Description:</td>
-												<td><input type="text" name="description"></td>
-											</tr>
-
-											<tr>
-												<td><input type="submit" value="Add">
-												<td><input type="reset" value="Reset">
-											</tr>
-
-										</table>
-										</div>
-</div></div>
-									</form:form>			
-								<form:form id="supplier-form" action="addSupplier" method="post">
-									<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-									
-										<table>
-											<tr>
-												<td>Supplier ID:</td>
-												<td><input type="text" name="supplierid"></td>
-											</tr>
-											<tr>
-												<td>Supplier name:</td>
-												<td><input type="text" name="name"></td>
-											</tr>
-											<tr>
-												<td>Supplier Address :</td>
-												<td><input type="text" name="address"></td>
-											</tr>
-											<tr>
-												<td>Supplier MailID :</td>
-												<td><input type="text" name="emailid"></td>
-											</tr>
-											<tr>
-												<td>Supplier contact number:</td>
-												<td><input type="text" name="contactnumber"></td>
-											</tr>
-											<tr>
-												<td><input type="submit" value="Add">
-												<td><input type="reset" value="Reset">
-											</tr>
-
-										</table>
-										</div>
-</div></div>
-									</form:form>			
-								
-                                 								
-                                   
-             </div>
-             </div>
-             </div>
-             </div>
-             	<div class="row">
-			<div ng-view></div>
-			<script>
-			var app = angular.module("myApp", ["ngRoute"]);
-			app.config(function($routeProvider) {
-			    $routeProvider
-			    .when("getAllCategories", {
-			        templateUrl : "views/categorylist.jsp"
-			    })
-			    .when("getAllSupplier", {
-			        templateUrl : "views/supplierList.jsp"
-			    })
-			   .when("getAllProduct", {
-			        templateUrl : "views/productList.jsp"
-			    })
-			    //.when("adminregister", {
-			       // templateUrl : "views/adminRegister.jsp"
-			   // })*/
-
-			   	});
-			
-			</script>
-			
-                     </div>       
-
-
-
-
-
-
-
 </body>
 </html>

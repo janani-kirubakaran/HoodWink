@@ -2,6 +2,7 @@ package com.niit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,37 +18,44 @@ public class AdminController {
 	@Autowired
 	AdminDAO adminuser;
 
+	
+
 	@RequestMapping(value="/isValidAdmin", method = RequestMethod.POST)
-	public ModelAndView showMessage(@RequestParam(value = "adminname") String name,
-			@RequestParam(value = "password") String password) {
+	public String showMessage(@RequestParam(value = "adminname") String name,
+			@RequestParam(value = "password") String password,Model model) {
 		System.out.println("admin controller");
 
 		String message;
-		ModelAndView mv;
+	
 		if (adminuser.isValidAdmin(name, password)) {
 			message = "Valid credentials";
-			mv = new ModelAndView("adminhome");
+			model.addAttribute("adminname", "true");
+			model.addAttribute("name",name);
+			return "adminhome";
 		} else {
 			message = "Invalid credentials";
-			mv = new ModelAndView("signin");
+			model.addAttribute("message",message);
+			return "signin";
 		}
+	}	
 
-		mv.addObject("message", message);
-		mv.addObject("name", name);
 
-		return mv;
-	}
-	@RequestMapping(value="/adminregister", method = RequestMethod.POST)
-	public ModelAndView registerAdmin(@ModelAttribute Admin admin) {
-		
-		String msg;
-		ModelAndView mv;
-	   msg="Registered successfully";
-	   adminuser.adminSaveOrUpdate(admin);
-	  mv= new ModelAndView("signin");
-	  mv.addObject("msg", msg);
-	  return mv;
-	  
-	 }
-
+		@RequestMapping(value="/adminregister", method = RequestMethod.POST)
+		public ModelAndView registerAdmin(@ModelAttribute Admin admin) {
+			
+			String msg;
+			ModelAndView mv;
+		   msg="Registered successfully";
+		   adminuser.adminSaveOrUpdate(admin);
+		  mv= new ModelAndView("signin");
+		  mv.addObject("msg", msg);
+		  return mv;
+		  
+		 }
+@RequestMapping(value="addAdmin",method = RequestMethod.GET)
+public String addAdmins(Model model)
+{
+	model.addAttribute("clickedAddAdmin","true");
+	return "adminhome";
+}
 }

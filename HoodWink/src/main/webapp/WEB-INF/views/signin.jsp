@@ -16,8 +16,7 @@
 <title>Signin/Signout</title>
 <style>
 body {
-	
-    padding-top: 90px;
+	    padding-top: 90px;
 }
 .panel-login {
 	border-color: #ccc;
@@ -153,12 +152,13 @@ $(function() {
 </script>
 
 </head>
-<body>
+<body style="background-image:url(resources/images/background4.png); background-size: cover">
 ${message}
 ${msg}
-	<div class="container">
+<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+
+				<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
 					<div class="panel-heading">
 						<div class="row ">
@@ -280,6 +280,6 @@ ${msg}
 					</div>
 				</div>
 			</div>
-
+</div></div>
 </body>
 </html>

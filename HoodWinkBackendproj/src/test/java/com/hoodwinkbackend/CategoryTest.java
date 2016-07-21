@@ -1,10 +1,10 @@
 package com.hoodwinkbackend;
 
-import java.util.List;
+//import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.dao.CategoryDAO;
+//import com.dao.CategoryDAO;
 import com.model.Category;
 
 public class CategoryTest {
@@ -19,7 +19,7 @@ public static void main(String[] args) {
 	@SuppressWarnings("unused")
 	Category c =(Category)	  context.getBean("category");
 	
-	CategoryDAO categoryDAO = (CategoryDAO)  context.getBean("categoryDAO");
+	//CategoryDAO categoryDAO = (CategoryDAO)  context.getBean("categoryDAO");
 	
 /*	
 	c.setId("TAB_003");
@@ -30,16 +30,17 @@ public static void main(String[] args) {
 	categoryDAO.saveOrUpdate(c);
 	*/
 	
-	
+	/*
 	
 	List<Category>  list =    categoryDAO.list();
 	
 	for(Category cat : list)
 	{
-		System.out.println(cat.getId()  + ":" +  cat.getName()  + ":"+  cat.getDescription());
+		System.out.println(cat.get()  + ":" +  cat.getName()  + ":"+  cat.getDescription());
 	}
 		
 		
 	}
-
+*/
+}
 }

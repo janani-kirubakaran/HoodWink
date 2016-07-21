@@ -5,7 +5,7 @@ var pApp = angular.module("pApp", []);
 					method : 'GET',
 					url : 'listProduct'
 				}).success(function(pdata, status, headers, config) {
-					$scope.products = pdata;
+					$scope.products = pdata; alert(pdata);
 				}).error(function(pdata, status, headers, config) {
 					alert( "failure");
 				});
