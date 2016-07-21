@@ -19,9 +19,30 @@
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script
 	src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-<script src="resources/js/productjs.js"></script>
+
 <title>Product List</title>
 </head>
+<style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color:#101010;
+}
+
+th {
+	background-color: #101010;
+	color: red;
+}
+</style>
+
 
 <body>
 	<h4>List of available product</h4>
@@ -95,6 +116,8 @@
 												items="${categoryList}" itemValue="categoryid"
 												itemLabel="categoryid" /></td>
 									</tr>
+									  
+									
 									<tr>
 										<td colspan="2"><c:if test="${!empty product.name}">
 												<input type="submit"
@@ -104,28 +127,28 @@
 													value="<spring:message text="Add Product"/>" />
 											</c:if></td>
 									</tr>
-								</table>
+									                 
+           								</table>
 							</form:form>
 						</div>
 					</div>
 				</div>
 				<br>
-				<div class="col-sm-7">
+				
+			</div>
+		</div>
+	</div>
+		<script src="resources/js/productjs.js"></script>
+		<div class="col-sm-7">
 					<div class="panel panel-default"
 						style="background-color: #303030; color: #E0E0E0">
 						<div class="panel-heading"
-							style="background-color: #101010; color: #E0E0E0">Category
-							List</div>
+							style="background-color: #F0F0F0; color: #E0E0E0">Category
+							List</div>       
 						<div class="panel-body">
 
-							<div ng-app="pApp">
-								<div ng-controller="productCtrl">
-									<div class="input-group">
-										<input type="text" class="form-control" ng-model="search">
-									</div>
-									<br /> <br />
-									<!--  c:forEach items="${productList}" var="product" varStatus="status"-->
-									<table align="left" border="1">
+		
+		<table align="left" border="1">
 										<tr>
 
 											<th align="left">product ID</th>
@@ -138,36 +161,25 @@
 											<th>delete</th>
 										</tr>
 
-										<tr ng-repeat="product in products | filter:search">
-
-											<td>{{product.productid}}</td>
-											<td>{{product.name}}</td>
-											<td>{{product.description}}</td>
-											<td>{{product.price}}</td>
-											<td>{{product.category.categoryid}}</td>
-											<td>{{product.supplier.supplierid}}</td>
+											<c:forEach items="${productList}" var="product">
+										<tr>
+											<td>${product.productid}</td>
+											<td>${product.name}</td>
+											<td>${product.description}</td>
+											<td>${product.price}</td>
+											<td>${product.category.categoryid}</td>
+											<td>${product.supplier.supplierid}</td>
 											<td><a
 												href="<c:url value='editProduct/{{product.productid}}' />"><span
 													class="glyphicon glyphicon-edit"></span></a></td>
-											<td><a
-												href="<c:url value='delete/{{product.productid}}' />"><span
-													class="glyphicon glyphicon-trash"></span></a></td>
+											<td><form:form action="deleteProduct"><input type="submit" name="delete" value="${product.productid}"></form:form></td>
 
 
 
 										</tr>
-
+</c:forEach>
 									</table>
-									<br /> <br />
-								
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-		<script src="resources/js/productjs.js"></script>
+		</div></div></div>
+		
 </body>
 </html>

@@ -4,9 +4,9 @@
 				$http({
 					method : 'GET',
 					url : 'listCategory'
-				}).success(function(data, status, headers, config) {
-					$scope.categories = data; alert(data);
-				}).error(function(data, status, headers, config) {
+				}).success(function(cdata, status, headers, config) {
+					$scope.categories = cdata;alert(cdata);
+				}).error(function(cdata, status, headers, config) {
 					alert( "failure");
 				});
 		} ])

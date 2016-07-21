@@ -33,12 +33,12 @@ th, td {
 }
 
 tr:nth-child(even) {
-	background-color: #f2f2f2
+	background-color: 
 }
 
 th {
 	background-color: #101010;
-	color: white;
+	color: red;
 }
 </style>
 <body>
@@ -118,12 +118,12 @@ th {
 					</div>
 				</div>
 				<br>
-				<div class="col-sm-7">
+							<div class="col-sm-7">
 					<div class="panel panel-default"
-						style="background-color: #505050; color: #404040">
+						style="background-color: #303030; color: #E0E0E0">
 						<div class="panel-heading"
-							style="background-color: #101010; color: #E0E0E0">Category
-							List</div>
+							style="background-color: #F0F0F0; color: #E0E0E0">Category
+							List</div>       
 						<div class="panel-body">
 
 							<div ng-app="sApp">
@@ -131,7 +131,7 @@ th {
 
 									<h4>List of available supplier</h4>
 									<div class="input-group">
-										<input type="text" class="form-control" ng-model="search">
+										<input type="text" class="form-control" ng-model="search" placeholder="search..">
 									</div>
 									<br /> <br />
 

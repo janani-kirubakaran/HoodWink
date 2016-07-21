@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -39,8 +40,8 @@ public class CategoryController {
 		return mv;
 	}
 
-	@RequestMapping("delete/{categoryid}")
-	public String deleteCategory(@PathVariable("categoryid") String categoryid) {
+	@RequestMapping("deleteCategory")
+	public String deleteCategory(@RequestParam(name = "delete")  String categoryid) {
 		categoryDAO.delete(categoryid);
 		// List<Category> categoryList = categoryDAO.list();
 		return "redirect:/getAllCategory";
@@ -64,14 +65,7 @@ public class CategoryController {
 		return new ModelAndView("adminhome");
 	}
 
-	@RequestMapping(value = "listCategory", method = RequestMethod.GET)
-	public @ResponseBody String getGsons() {
-		Gson gson = new Gson();
-		System.out.print("gson");
-		List<Category> categoryList = categoryDAO.list();
-		String data = gson.toJson(categoryList);
-		return data;
-	}
+	
 
 	@RequestMapping(value = "/category/add", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category category) {
@@ -87,7 +81,14 @@ public class CategoryController {
 
 		return "redirect:/getAllCategory";
 	}
-
+	@RequestMapping(value = "listCategory", method = RequestMethod.GET)
+	public @ResponseBody String getGsons() {
+		Gson gson = new Gson();
+		System.out.print("gson");
+		List<Category> categoryList = categoryDAO.list();
+		String cdata = gson.toJson(categoryList);
+		return cdata;
+	}
 	@RequestMapping(value = "editCategory/{categoryid}", method = RequestMethod.GET)
 	public String edit(@PathVariable("categoryid") String categoryid, Model model) {
 

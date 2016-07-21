@@ -16,45 +16,28 @@
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script
 	src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-<script src="resources/js/categoryjs.js"></script>
-<style type="text/css">
-.tg {
+
+<style>
+table {
 	border-collapse: collapse;
-	border-spacing: 0;
-	border-color: #ccc;
+	width: 100%;
 }
 
-.tg td {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: #ccc;
-	color: #333;
-	background-color: #fff;
+th, td {
+	text-align: left;
+	padding: 8px;
 }
 
-.tg th {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: #ccc;
-	color: #333;
-	background-color: #f0f0f0;
+tr:nth-child(even) {
+	background-color: red;
 }
 
-.tg .tg-4eph {
-	background-color: #f9f9f9
+th {
+	background-color: #101010;
+	color: red;
 }
 </style>
+
 </head>
 <body>
 	<h1>AddOrUpdate a Category</h1>
@@ -123,6 +106,12 @@
 				</div>
 				
 
+							</div>
+		</div>
+	</div>
+	
+	<script src="resources/js/categoryjs.js"></script>
+	
 				<div class="col-sm-7">
 					<div class="panel panel-default"
 						style="background-color: #303030; color: #E0E0E0">
@@ -130,18 +119,7 @@
 							style="background-color: #101010; color: #E0E0E0">Category
 							List</div>
 						<div class="panel-body">
-
-							<div ng-app="myApp">
-								<div ng-controller="categoryCtrl">
-
-									<h4>List of available categories</h4>
-
-									<div class="input-group">
-										<input type="text" class="form-control" ng-model="search">
-									</div>
-									<br /> <br />
-
-									<table align="left" border="1">
+						<table align="left" border="1">
 										<tr>
 
 											<th align="left">Id</th>
@@ -150,25 +128,19 @@
 											<th>edit</th>
 											<th>delete</th>
 										</tr>
-										<tr ng-repeat="category in categories | filter:search">
-											<td>{{category.categoryid}}</td>
-											<td>{{category.name}}</td>
-											<td>{{category.description}}</td>
+										<c:forEach items="${categoryList}" var="category">
+										<tr>
+											<td>${category.categoryid}</td>
+											<td>${category.name}</td>
+											<td>${category.description}</td>
 											<td align="center"><a
-												href="editCategory/{{category.categoryid}}"><span class="glyphicon glyphicon-edit"></span></a></td>
-											<td align="center"><a
-												href="delete/{{category.categoryid}}"><span class="glyphicon glyphicon-trash"></span></a></td>
+												href="editCategory/${category.categoryid}"><span class="glyphicon glyphicon-edit"></span></a></td>
+											<td align="center"><form:form action="deleteCategory"><input type="submit" name="delete" value="${category.categoryid}"></form:form></td>
+	
 										</tr>
-
+</c:forEach>
 									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+						</div></div></div>
 	
 	
 </body>

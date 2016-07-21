@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,7 +33,15 @@ public class ProductController {
 
 	@Autowired(required=true)
 	private SupplierDAO supplierDAO;
-
+	@RequestMapping(value="listProduct",method= RequestMethod.GET)
+	public @ResponseBody String getGsons()
+	{
+		Gson gson = new Gson();
+	System.out.print("gson");
+	List<Product> productList = productDAO.list();
+		 String pdata = gson.toJson(productList);
+	    return pdata;
+	}
 	@RequestMapping("/product/add")
 	public String addProduct(@ModelAttribute("product") Product product) {
 		Category category = categoryDAO.get(product.getCategory().getCategoryid());
@@ -93,8 +102,8 @@ public class ProductController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("delete/{productid}")
-    public String deleteSupplier(@PathVariable("productid") String productid) throws Exception{
+	@RequestMapping("deleteProduct")
+    public String deleteSupplier(@RequestParam(name = "delete")  String productid) throws Exception{
 		
        try {
     	   System.out.println("deleted");
@@ -123,15 +132,7 @@ public class ProductController {
  return "adminhome";
 			}
 
-	@RequestMapping(value="listProduct",method= RequestMethod.GET)
-public @ResponseBody String getGsons()
-{
-	Gson gson = new Gson();
-System.out.print("gson");
-List<Product> productList = productDAO.list();
-	 String pdata = gson.toJson(productList);
-    return pdata;
-}
+	
 	@RequestMapping(value = "editProduct/{productid}")
 	public String edit(@PathVariable("productid") String productid,Model model) {
 
