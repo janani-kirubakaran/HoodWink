@@ -1,5 +1,7 @@
 package com.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,8 +12,12 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "user")
 @Component
-public class User {
+public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "email")
 	private String email;
@@ -19,6 +25,7 @@ public class User {
 	private String password;
 	private String address;
 	private int contact_number;
+	
 
 	public String getEmail() {
 		return email;

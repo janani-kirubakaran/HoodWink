@@ -34,7 +34,7 @@ th, td {
 }
 
 tr:nth-child(even) {
-	background-color:#101010;
+	background-color: #101010;
 }
 
 th {
@@ -116,8 +116,8 @@ th {
 												items="${categoryList}" itemValue="categoryid"
 												itemLabel="categoryid" /></td>
 									</tr>
-									  
-									
+
+
 									<tr>
 										<td colspan="2"><c:if test="${!empty product.name}">
 												<input type="submit"
@@ -127,59 +127,63 @@ th {
 													value="<spring:message text="Add Product"/>" />
 											</c:if></td>
 									</tr>
-									                 
-           								</table>
+
+								</table>
 							</form:form>
 						</div>
 					</div>
 				</div>
 				<br>
-				
+
+			</div>
+
+			<div class="col-sm-7">
+				<div class="panel panel-default"
+					style="background-color: #303030; color: #E0E0E0">
+					<div class="panel-heading"
+						style="background-color: #F0F0F0; color: #E0E0E0">Product List
+						List</div>
+					<div class="panel-body">
+
+
+						<table align="left" border="1">
+							<tr>
+
+								<th align="left">product ID</th>
+								<th align="left">Name</th>
+								<th align="left">Description</th>
+								<th align="left">Price</th>
+								<th align="left">CategoryID</th>
+								<th align="left">SuppierID</th>
+								<th>edit</th>
+								<th>delete</th>
+							</tr>
+
+							<c:forEach items="${productList}" var="product">
+								<tr>
+									<td>${product.productid}</td>
+									<td>${product.name}</td>
+									<td>${product.description}</td>
+									<td>${product.price}</td>
+									<td>${product.category.categoryid}</td>
+									<td>${product.supplier.supplierid}</td>
+									<td><a
+										href="<c:url value='editProduct/${product.productid}' />"><span
+											class="glyphicon glyphicon-edit"></span></a></td>
+									<td><form:form action="deleteProduct">
+											<input type="submit" name="delete"
+												value="${product.productid}">
+										</form:form></td>
+
+
+
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-		<script src="resources/js/productjs.js"></script>
-		<div class="col-sm-7">
-					<div class="panel panel-default"
-						style="background-color: #303030; color: #E0E0E0">
-						<div class="panel-heading"
-							style="background-color: #F0F0F0; color: #E0E0E0">Category
-							List</div>       
-						<div class="panel-body">
-
-		
-		<table align="left" border="1">
-										<tr>
-
-											<th align="left">product ID</th>
-											<th align="left">Name</th>
-											<th align="left">Description</th>
-											<th align="left">Price</th>
-											<th align="left">CategoryID</th>
-											<th align="left">SuppierID</th>
-											<th>edit</th>
-											<th>delete</th>
-										</tr>
-
-											<c:forEach items="${productList}" var="product">
-										<tr>
-											<td>${product.productid}</td>
-											<td>${product.name}</td>
-											<td>${product.description}</td>
-											<td>${product.price}</td>
-											<td>${product.category.categoryid}</td>
-											<td>${product.supplier.supplierid}</td>
-											<td><a
-												href="<c:url value='editProduct/{{product.productid}}' />"><span
-													class="glyphicon glyphicon-edit"></span></a></td>
-											<td><form:form action="deleteProduct"><input type="submit" name="delete" value="${product.productid}"></form:form></td>
-
-
-
-										</tr>
-</c:forEach>
-									</table>
-		</div></div></div>
-		
 </body>
 </html>

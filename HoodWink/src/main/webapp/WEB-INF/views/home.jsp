@@ -80,6 +80,9 @@
 </c:if>
 					<li><a href="#"><span
 							class="glyphicon glyphicon-shopping-cart"></span>Cart</a>
+							<li><a href="memberShip.obj"><span
+							class="glyphicon glyphicon-register"></span> register</a></li>
+							
 							
 					<li><a href="signin"><span
 							class="glyphicon glyphicon-log-in"></span> Login</a></li>
